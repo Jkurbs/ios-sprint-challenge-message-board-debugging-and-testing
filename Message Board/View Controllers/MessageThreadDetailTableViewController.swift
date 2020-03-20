@@ -14,6 +14,7 @@ class MessageThreadDetailTableViewController: UITableViewController {
         super.viewDidLoad()
 
         title = messageThread?.title
+  
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,17 +34,22 @@ class MessageThreadDetailTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! LabelCell
+        
          cell.accessibilityIdentifier = "messageCell\(indexPath.row)"
 
         let message = messageThread?.messages[indexPath.row]
-        
-        cell.textLabel?.text = message?.text
-        cell.detailTextLabel?.text = message?.sender
+        cell.messageText = message?.text
         
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let message =  messageThread?.messages[indexPath.row]
+        let height = LabelCell.textHeight(message?.text ?? "", width: tableView.frame.width)
+        return height
 
+    }
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

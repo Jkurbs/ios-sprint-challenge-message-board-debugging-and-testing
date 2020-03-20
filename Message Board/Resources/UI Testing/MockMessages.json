@@ -6,6 +6,11 @@
                 "sender" : "Joe",
                 "text" : "Checking to make sure this works.",
                 "timestamp" : 5.58544390219155E8
+            },
+            "-LMIUYlkKPkcO_uQUtnf" : {
+                "sender" : "Joe",
+                "text" : "test message.",
+                "timestamp" : 5.58544390219155E8
             }
         },
         "title" : "A New Thread"

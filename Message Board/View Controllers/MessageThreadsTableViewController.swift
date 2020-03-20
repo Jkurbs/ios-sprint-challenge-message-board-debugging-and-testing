@@ -14,6 +14,7 @@ class MessageThreadsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         tableView?.accessibilityIdentifier = "ThreadsTableView"
+        tableView.separatorStyle = .none
         
         messageThreadController.fetchMessageThreads {
             DispatchQueue.main.async {
