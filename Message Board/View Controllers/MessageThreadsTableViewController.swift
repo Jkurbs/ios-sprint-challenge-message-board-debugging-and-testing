@@ -14,7 +14,7 @@ class MessageThreadsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         tableView?.accessibilityIdentifier = "ThreadsTableView"
-        tableView.separatorStyle = .none
+        
         
         messageThreadController.fetchMessageThreads {
             DispatchQueue.main.async {
@@ -49,8 +49,6 @@ class MessageThreadsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MessageThreadCell", for: indexPath)
         
         cell.accessibilityIdentifier = "cell\(indexPath.row)"
-        cell.accessibilityLabel = "cellLabel\(index)"
-
         
         cell.textLabel?.text = messageThreadController.messageThreads[indexPath.row].title
 

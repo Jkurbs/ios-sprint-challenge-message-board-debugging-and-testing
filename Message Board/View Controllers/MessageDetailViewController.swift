@@ -13,6 +13,7 @@ class MessageDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
          navigationItem.rightBarButtonItem?.accessibilityIdentifier = "MessageThreadDetailTableViewController.sendButton"
     }
     
@@ -28,7 +29,6 @@ class MessageDetailViewController: UIViewController {
         }
         
        controller.createMessage(in: messageThread, withText: messageText, sender: senderName, completion: {
-            print("Message created!")
         DispatchQueue.main.async {
             self.navigationController?.popViewController(animated: true)
         }

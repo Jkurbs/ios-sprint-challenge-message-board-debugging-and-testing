@@ -112,8 +112,4 @@ class MessageThreadTests: XCTestCase {
         }.resume()
         wait(for: [didFinish!], timeout: 10) // blocking sync wait
     }
-    
-    func testFetchMessages() {
-        
-    }
 }

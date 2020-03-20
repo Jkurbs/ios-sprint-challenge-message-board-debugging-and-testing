@@ -15,33 +15,36 @@ class MessageThreadController {
         let requestURL = MessageThreadController.baseURL.appendingPathExtension("json")
         
         // This if statement and the code inside it is used for UI Testing. Disregard this when debugging.
-        fetchLocalMessageThreads(completion: completion)
-
+        
+//        fetchLocalMessageThreads(completion: completion)
+        
+        // For some reason is app.launchArguments is not working for me
 //        if isUITesting {
 //            fetchLocalMessageThreads(completion: completion)
 //            return
 //        }
         
-//        URLSession.shared.dataTask(with: requestURL) { (data, _, error) in
-//            if let error = error {
-//                NSLog("Error fetching message threads: \(error)")
-//                completion()
-//                return
-//            }
-//            
-//            guard let data = data else { NSLog("No data returned from data task"); completion(); return }
-//            do {
-//                let threads = try JSONDecoder().decode([String:MessageThread].self, from: data)
-//                for thread in threads {
-//                    self.messageThreads.append(thread.value)
-//                }
-//            } catch {
-//                self.messageThreads = []
-//                NSLog("Error decoding message threads from JSON data: \(error)")
-//            }
-//            
-//            completion()
-//        }.resume()
+        
+        URLSession.shared.dataTask(with: requestURL) { (data, _, error) in
+            if let error = error {
+                NSLog("Error fetching message threads: \(error)")
+                completion()
+                return
+            }
+
+            guard let data = data else { NSLog("No data returned from data task"); completion(); return }
+            do {
+                let threads = try JSONDecoder().decode([String:MessageThread].self, from: data)
+                for thread in threads {
+                    self.messageThreads.append(thread.value)
+                }
+            } catch {
+                self.messageThreads = []
+                NSLog("Error decoding message threads from JSON data: \(error)")
+            }
+
+            completion()
+        }.resume()
     }
     
     func createMessageThread(with title: String, completion: @escaping () -> Void) {

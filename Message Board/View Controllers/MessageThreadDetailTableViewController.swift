@@ -23,6 +23,8 @@ class MessageThreadDetailTableViewController: UITableViewController {
         navigationItem.rightBarButtonItem?.accessibilityIdentifier = "MessageThreadDetailTableViewController.addButton"
         
         tableView.accessibilityIdentifier = "MessagesTableView"
+        tableView.separatorStyle = .none
+
         
         self.tableView.reloadData()
     }
