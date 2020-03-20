@@ -7,20 +7,57 @@
 //
 
 import XCTest
+@testable import Message_Board
+
 
 class Message_BoardUITests: XCTestCase {
     
-    var app: XCUIApplication!
+    var app: XCUIApplication {
+        return XCUIApplication()
+    }
+    
+    private var addButton: XCUIElement {
+        return app.buttons["MessageThreadDetailTableViewController.addButton"]
+    }
+    
+    private var sendButton: XCUIElement {
+        return app.buttons["MessageThreadDetailTableViewController.sendButton"]
+    }
     
     override func setUp() {
         super.setUp()
         
         continueAfterFailure = false
-        app = XCUIApplication()
-        
         // NOTE: Keep this setup as is for UI Testing
         app.launchArguments = ["UITesting"]
         app.launch()
+     
     }
     
+    
+    func testAddMessageVC() {
+        
+        let threadsTable = app.tables.matching(identifier: "ThreadsTableView")
+        let cell = threadsTable.cells.element(matching: .cell, identifier: "cell0")
+                      
+        XCTAssert(app.staticTexts["A New Thread"].exists)
+
+        cell.tap()
+        addButton.tap()
+        
+        let textField = app.textFields.firstMatch
+        textField.tap()
+        
+        textField.typeText("New message title")
+        
+        let textView = app.textViews.firstMatch
+        textView.tap()
+        textView.typeText("New message description")
+        
+        sendButton.tap()
+        
+        XCTAssert(app.staticTexts["New message description"].exists)
+            
+        
+    }
 }

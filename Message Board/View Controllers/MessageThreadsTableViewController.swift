@@ -10,8 +10,10 @@ import UIKit
 
 class MessageThreadsTableViewController: UITableViewController {
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tableView?.accessibilityIdentifier = "ThreadsTableView"
         
         messageThreadController.fetchMessageThreads {
             DispatchQueue.main.async {
@@ -44,6 +46,10 @@ class MessageThreadsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MessageThreadCell", for: indexPath)
+        
+        cell.accessibilityIdentifier = "cell\(indexPath.row)"
+        cell.accessibilityLabel = "cellLabel\(index)"
+
         
         cell.textLabel?.text = messageThreadController.messageThreads[indexPath.row].title
 

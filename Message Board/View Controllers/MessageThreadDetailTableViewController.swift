@@ -19,6 +19,10 @@ class MessageThreadDetailTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        navigationItem.rightBarButtonItem?.accessibilityIdentifier = "MessageThreadDetailTableViewController.addButton"
+        
+        tableView.accessibilityIdentifier = "MessagesTableView"
+        
         self.tableView.reloadData()
     }
     
@@ -30,10 +34,11 @@ class MessageThreadDetailTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath)
+         cell.accessibilityIdentifier = "messageCell\(indexPath.row)"
 
         let message = messageThread?.messages[indexPath.row]
         
-        cell.textLabel?.text = message?.messageText
+        cell.textLabel?.text = message?.text
         cell.detailTextLabel?.text = message?.sender
         
         return cell
@@ -42,11 +47,13 @@ class MessageThreadDetailTableViewController: UITableViewController {
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "AddMesage" {
+        if segue.identifier == "AddMessage" {
             guard let destinationVC = segue.destination as? MessageDetailViewController else { return }
             
-            destinationVC.messageThreadController = messageThreadController
-            destinationVC.messageThread = messageThread
+            DispatchQueue.main.async {
+                destinationVC.messageThreadController = self.messageThreadController
+                destinationVC.messageThread = self.messageThread
+            }
         }
     }
     

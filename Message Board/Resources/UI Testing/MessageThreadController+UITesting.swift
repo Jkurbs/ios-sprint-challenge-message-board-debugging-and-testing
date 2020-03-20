@@ -17,6 +17,8 @@ extension MessageThreadController {
             
             self.messageThreads = Array(try JSONDecoder().decode([String: MessageThread].self, from: mockData).values)
             
+            print(self.messageThreads)
+            
         } catch {
             NSLog("Error decoding mock data: \(error)")
         }
