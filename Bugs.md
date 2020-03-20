@@ -15,10 +15,15 @@ Turning *[MessageThread].self* to *MessageThread.self* should fix the problem
 ### Thread fetching 
 
 * Expected to decode Array<Any> but found a dictionary instead.
-Turning *[MessageThread].self* to *MessageThread.self* should fix the problem
+Turning *[MessageThread].self* to *[String:MessageThread].self* should fix the problem
 
 
 ### Message creation 
+
+* Messages not being created 
+* MessageThreadDetailTableViewController not dismissing
+
+
 
 ### Message fetching 
 

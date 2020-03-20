@@ -10,7 +10,7 @@ import Foundation
 
 class MessageThread: Codable, Equatable {
 
-    let title: String?
+    let title: String
     var messages: [MessageThread.Message]
     let identifier: String
 
